@@ -5,8 +5,8 @@ public class CrearCelda {
 	final private static double PROBABILIDAD = 0.25;
 	
 	public static Celda crearCeldaConSimbolo(char simbolo) {
-		// le pasamos un simbolo
-		switch (simbolo) { // creamos segun el simbola la celda correspondiete
+		
+		switch (simbolo) { 
 			case 'x' : if(Math.random() < PROBABILIDAD) { // calculo de probabilidad de que una celda viva enferme
 							return new CeldaEnferma();
 						}else {
@@ -21,7 +21,7 @@ public class CrearCelda {
 	
 	public static Celda crearCeldaAleatoria() {
 		int probabilidad = (int) (Math.random()*4); // generamos un numero aleatorio 
-		Celda nuevaCelda = new CeldaMuerta(); // creamos nueva celda
+		Celda nuevaCelda = new CeldaMuerta();
 		
 		switch(probabilidad) {  // segun el numero aleatorio la celda que se va crear 
 			case 0: nuevaCelda = new CeldaViva(); break;
@@ -29,6 +29,6 @@ public class CrearCelda {
 			case 2: nuevaCelda = new CeldaEnferma(); break;
 			case 3: nuevaCelda = new CeldaEnferma(); break;
 		}
-		return nuevaCelda; // retornamos celda creada aleatoriamente
+		return nuevaCelda; 
 	}
 }

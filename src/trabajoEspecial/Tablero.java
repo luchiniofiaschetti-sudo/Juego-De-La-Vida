@@ -25,7 +25,7 @@ public class Tablero {
 		}
 	}
 	
-	public void cargarDesdeArchivo(String texto) {
+	public boolean cargarDesdeArchivo(String texto) {
 		BufferedReader archivo = null; // inicializamos, para leer los datos(texto)
 		
 		try {
@@ -46,9 +46,11 @@ public class Tablero {
 					this.agregarCelda(f, c, nuevaCelda);
 				}
 			}
+			return true;
 		}
 		catch(IOException e) {
 			System.out.println("Error en lectura de archivo " + e.getMessage());
+			return false;
 		}																			//capturamos posibles errores
 		catch(NumberFormatException e) {
 			System.out.println("Error en dimensiones " + e.getMessage());
@@ -56,30 +58,32 @@ public class Tablero {
 		finally {
 			try {
 				if(archivo != null) {
-					archivo.close();   // si no quedo vacio cerramos archivo
+					archivo.close();
+					return true;// si no quedo vacio cerramos archivo
 				}
 			}catch(IOException e) {
 				System.out.println("Error al cerrar el archivo " + e.getMessage());// capturamos error 
+				return false;
 			}
-		}
+		}return true;
 	}
 	
 	public boolean nuevaGeneracion() {
-		Celda[][] nuevaCelda = new Celda[this.filas][this.columnas]; // creo tablero nuevo
+		Celda[][] nuevaCelda = new Celda[this.filas][this.columnas]; 
 		boolean sonIguales = true; // lo uso para luego saber si el ciclo corta o continua
 		
 		for(int f = 0; f < this.filas; f++) {
-			for(int c = 0; c < this.columnas; c++) {			//recorre la matriz completa
-					int vecinos = cantidadVecinosVivos(f, c); 		//Consulta la cantidad vecinosVivos de dicha posicion
-					Celda proximaGeneracion = tablero[f][c].proximaGeneracion(vecinos);//pedimos calcule su proximaGeneracion
-					nuevaCelda[f][c] = proximaGeneracion; // la agregamos a matriz auxiciliar
+			for(int c = 0; c < this.columnas; c++) {	
+					int vecinos = cantidadVecinosVivos(f, c); 
+					Celda proximaGeneracion = tablero[f][c].proximaGeneracion(vecinos);
+					nuevaCelda[f][c] = proximaGeneracion; 
 			}
 		}
 		
 		for(int f = 0; f < this.filas; f++) {			// reescribimos tablero, corroborando si hay cambios
 			for(int c = 0; c < this.columnas; c++) {
-				if(this.tablero[f][c].getSimbolo() != nuevaCelda[f][c].getSimbolo()) { //simbolos distintos, de celda actual
-					sonIguales = false; 										// y copia, sonIguales = false(hubo cambios) 
+				if(this.tablero[f][c].getSimbolo() != nuevaCelda[f][c].getSimbolo()) { 
+					sonIguales = false; 
 				}
 					this.tablero[f][c] = nuevaCelda[f][c]; //reescribimos el tablero
 			}
