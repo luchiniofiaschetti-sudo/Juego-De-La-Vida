@@ -42,7 +42,6 @@ Este trabajo especial consiste en crear un tablero de celdas que evoluciona segu
 ---
 
 ## Herramientas usadas
-- TimerTask para jugabilidad con tiempo
 - Scanner para ingresar valores
 - BufferedReader para leer archivos .txt
 
