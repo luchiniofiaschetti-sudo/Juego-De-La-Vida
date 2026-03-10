@@ -50,8 +50,6 @@ Este trabajo especial consiste en crear un tablero de celdas que evoluciona segu
 ## Extensiones posibles
 1. Agregar un metodo abstracto en Celda (ejemplo: exposicionFronteriza) y en Tablero (cantidadCeldasLimitrofes) para nuevas reglas.
 2. Crear nuevas subclases de Celda con su propia logica de evolución y agregarlas en CrearCelda.
-3. Dentro del proyecto tenemos las clase ReglaEvolucion, las cuales no se usan actualmente pero son un enfoque para abstraer las regla de volucion.
-
 ---
 
 ## Nota de uso
